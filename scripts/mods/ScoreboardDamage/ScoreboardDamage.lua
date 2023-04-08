@@ -2,15 +2,18 @@ local mod = get_mod("ScoreboardDamage")
 local scoreboard = get_mod("scoreboard")
 local Breed = scoreboard:original_require("scripts/utilities/breed")
 
-mod.lessers = {
+mod.melee_lessers = {
 	"chaos_newly_infected",
 	"chaos_poxwalker",
-	"cultist_assault",
 	"cultist_melee",
-	"renegade_assault",
 	"renegade_melee",
+}
+mod.ranged_lessers = {
+	"cultist_assault",
+	"renegade_assault",
 	"renegade_rifleman",
 }
+
 mod.current_health = {}
 mod.last_enemy_interaction = {}
 
@@ -62,9 +65,10 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 				-- mod:echo(breed_or_nil.name)
 			end
 			
-			if table.array_contains(mod.lessers, breed_or_nil.name) then
-				-- Enemy is lesser
-				scoreboard:update_stat("lesser_damage_dealt", account_id, actual_damage)
+			if table.array_contains(mod.melee_lessers, breed_or_nil.name) then
+				scoreboard:update_stat("melee_lesser_damage_dealt", account_id, actual_damage)
+			elseif table.array_contains(mod.ranged_lessers, breed_or_nil.name) then
+				scoreboard:update_stat("ranged_lesser_damage_dealt", account_id, actual_damage)
 			end
 		end
 	end
@@ -77,7 +81,29 @@ mod.scoreboard_rows = {
 		text = "row_lesser_damage_dealt",
 		validation = "ASC",
 		iteration = "ADD",
+		summary = {
+			"melee_lesser_damage_dealt",
+			"ranged_lesser_damage_dealt",
+		},
 		group = "offense",
+		setting = "plugin_lesser_damage_dealt",
+	},
+	{
+		name = "melee_lesser_damage_dealt",
+		text = "row_melee_lesser_damage_dealt",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "lesser_damage_dealt",
+		setting = "plugin_lesser_damage_dealt",
+	},
+	{
+		name = "ranged_lesser_damage_dealt",
+		text = "row_ranged_lesser_damage_dealt",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "lesser_damage_dealt",
 		setting = "plugin_lesser_damage_dealt",
 	},
 }

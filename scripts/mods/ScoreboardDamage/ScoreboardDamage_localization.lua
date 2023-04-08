@@ -11,14 +11,18 @@ return {
 	},
 	plugin_lesser_damage_dealt = {
 		en = "Lesser Damage Dealt",
-		de = "Schaden an Lesseren",
-		ru = "Урона нанесено Боссу",
 		["zh-cn"] = "Lesser 伤害",
 	},
 	row_lesser_damage_dealt = {
-		en = "Lesser Damage Dealt",
-		de = "Schaden an Lesseren",
-		ru = "Урона нанесено Боссу",
-		["zh-cn"] = "Lesser 伤害",
+		en = "Melee / Ranged Lesser Damage Dealt",
+		["zh-cn"] = "普通近战 / 远程伤害",
+	},
+	row_melee_lesser_damage_dealt = {
+		en = "Melee Lesser Damage Dealt",
+		["zh-cn"] = "普通近战伤害",
+	},
+	row_ranged_lesser_damage_dealt = {
+		en = "Ranged Lesser Damage Dealt",
+		["zh-cn"] = "普通远程伤害",
 	},
 }
