@@ -11,6 +11,16 @@ return {
 				type = "checkbox",
 				default_value = true,
 			},
+			{
+				setting_id = "plugin_elite_damage_dealt",
+				type = "checkbox",
+				default_value = true,
+			},
+			{
+				setting_id = "plugin_special_disabler_damage_dealt",
+				type = "checkbox",
+				default_value = true,
+			},
 		},
 	},
 }

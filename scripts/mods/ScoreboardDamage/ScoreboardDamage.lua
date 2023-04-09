@@ -13,6 +13,33 @@ mod.ranged_lessers = {
 	"renegade_assault",
 	"renegade_rifleman",
 }
+mod.melee_elites = {
+	"cultist_berzerker",
+	"renegade_berzerker",
+	"renegade_executor",
+	"chaos_ogryn_bulwark",
+	"chaos_ogryn_executor",
+}
+mod.ranged_elites = {
+	"cultist_gunner",
+	"renegade_gunner",
+	"cultist_shocktrooper",
+	"renegade_shocktrooper",
+	"chaos_ogryn_gunner",
+}
+mod.specials = {
+	"chaos_poxwalker_bomber",
+	"renegade_grenadier",
+	"cultist_grenadier",
+	"renegade_sniper",
+	"renegade_flamer",
+	"cultist_flamer",
+}
+mod.disablers = {
+	"chaos_hound",
+	"cultist_mutant",
+	"renegade_netgunner",
+}
 
 mod.current_health = {}
 mod.last_enemy_interaction = {}
@@ -69,6 +96,14 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 				scoreboard:update_stat("melee_lesser_damage_dealt", account_id, actual_damage)
 			elseif table.array_contains(mod.ranged_lessers, breed_or_nil.name) then
 				scoreboard:update_stat("ranged_lesser_damage_dealt", account_id, actual_damage)
+			elseif table.array_contains(mod.melee_elites, breed_or_nil.name) then
+				scoreboard:update_stat("melee_elite_damage_dealt", account_id, actual_damage)
+			elseif table.array_contains(mod.ranged_elites, breed_or_nil.name) then
+				scoreboard:update_stat("ranged_elite_damage_dealt", account_id, actual_damage)
+			elseif table.array_contains(mod.specials, breed_or_nil.name) then
+				scoreboard:update_stat("special_damage_dealt", account_id, actual_damage)
+			elseif table.array_contains(mod.disablers, breed_or_nil.name) then
+				scoreboard:update_stat("disabler_damage_dealt", account_id, actual_damage)
 			end
 		end
 	end
@@ -105,5 +140,65 @@ mod.scoreboard_rows = {
 		group = "offense",
 		parent = "lesser_damage_dealt",
 		setting = "plugin_lesser_damage_dealt",
+	},
+	{
+		name = "elite_damage_dealt",
+		text = "row_elite_damage_dealt",
+		validation = "ASC",
+		iteration = "ADD",
+		summary = {
+			"melee_elite_damage_dealt",
+			"ranged_elite_damage_dealt",
+		},
+		group = "offense",
+		setting = "plugin_elite_damage_dealt",
+	},
+	{
+		name = "melee_elite_damage_dealt",
+		text = "row_melee_elite_damage_dealt",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "elite_damage_dealt",
+		setting = "plugin_elite_damage_dealt",
+	},
+	{
+		name = "ranged_elite_damage_dealt",
+		text = "row_ranged_elite_damage_dealt",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "elite_damage_dealt",
+		setting = "plugin_elite_damage_dealt",
+	},
+	{
+		name = "special_disabler_damage_dealt",
+		text = "row_special_disabler_damage_dealt",
+		validation = "ASC",
+		iteration = "ADD",
+		summary = {
+			"special_damage_dealt",
+			"disabler_damage_dealt",
+		},
+		group = "offense",
+		setting = "plugin_special_disabler_damage_dealt",
+	},
+	{
+		name = "special_damage_dealt",
+		text = "row_special_damage_dealt",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "special_disabler_damage_dealt",
+		setting = "plugin_special_disabler_damage_dealt",
+	},
+	{
+		name = "disabler_damage_dealt",
+		text = "row_disabler_damage_dealt",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "special_disabler_damage_dealt",
+		setting = "plugin_special_disabler_damage_dealt",
 	},
 }
