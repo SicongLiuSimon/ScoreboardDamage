@@ -18,12 +18,12 @@ return {
 		["zh-cn"] = "近战 / 远程普通敌人伤害",
 	},
 	row_melee_lesser_damage_dealt = {
-		en = "Melee Lesser Damage Dealt",
-		["zh-cn"] = "近战普通敌人伤害",
+		en = "Melee",
+		["zh-cn"] = "近战",
 	},
 	row_ranged_lesser_damage_dealt = {
-		en = "Ranged Lesser Damage Dealt",
-		["zh-cn"] = "远程普通敌人伤害",
+		en = "Ranged",
+		["zh-cn"] = "远程",
 	},
 	plugin_elite_damage_dealt = {
 		en = "Melee / Ranged Elite Damage Dealt",
@@ -34,12 +34,12 @@ return {
 		["zh-cn"] = "近战 / 远程精英敌人伤害",
 	},
 	row_melee_elite_damage_dealt = {
-		en = "Melee Elite Damage Dealt",
-		["zh-cn"] = "近战精英伤害",
+		en = "Melee",
+		["zh-cn"] = "近战",
 	},
 	row_ranged_elite_damage_dealt = {
-		en = "Ranged Elite Damage Dealt",
-		["zh-cn"] = "远程精英伤害",
+		en = "Ranged",
+		["zh-cn"] = "远程",
 	},
 	plugin_special_disabler_damage_dealt = {
 		en = "Special / Disabler Damage Dealt",
@@ -50,11 +50,11 @@ return {
 		["zh-cn"] = "专家 / 控制类伤害",
 	},
 	row_special_damage_dealt = {
-		en = "Special Damage Dealt",
-		["zh-cn"] = "专家伤害",
+		en = "Special",
+		["zh-cn"] = "专家",
 	},
 	row_disabler_damage_dealt = {
-		en = "Disabler Damage Dealt",
-		["zh-cn"] = "控制类伤害",
+		en = "Disabler",
+		["zh-cn"] = "控制",
 	},
 }
