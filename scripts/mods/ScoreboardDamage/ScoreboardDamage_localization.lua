@@ -10,35 +10,35 @@ return {
 		["zh-cn"] = "进攻分数",
 	},
 	plugin_melee_data = {
-		en = "Melee Killed / Damage Dealt",
-		["zh-cn"] = "近战击杀 / 伤害",
+		en = "Melee Kills / Damage",
+		["zh-cn"] = "近战武器击杀 / 伤害",
 	},
 	row_melee_data= {
-		en = "Melee Killed / Damage Dealt",
-		["zh-cn"] = "近战击杀 / 伤害",
+		en = "Melee Kills / Damage",
+		["zh-cn"] = "近战武器击杀 / 伤害",
 	},
 	row_melee_killed = {
-		en = "Killed",
+		en = "Kills",
 		["zh-cn"] = "击杀",
 	},
 	row_melee_damaged = {
-		en = "Damage Dealt",
+		en = "Damage",
 		["zh-cn"] = "伤害",
 	},
 	plugin_ranged_data = {
-		en = "Ranged Killed / Damage Dealt",
-		["zh-cn"] = "远程击杀 / 伤害",
+		en = "Ranged Kills / Damage",
+		["zh-cn"] = "远程武器击杀 / 伤害",
 	},
 	row_ranged_data= {
-		en = "Ranged Killed / Damage Dealt",
-		["zh-cn"] = "远程击杀 / 伤害",
+		en = "Ranged Kills / Damage",
+		["zh-cn"] = "远程武器击杀 / 伤害",
 	},
 	row_ranged_killed = {
-		en = "Killed",
+		en = "Kills",
 		["zh-cn"] = "击杀",
 	},
 	row_ranged_damaged = {
-		en = "Damage Dealt",
+		en = "Damage",
 		["zh-cn"] = "伤害",
 	},
 	plugin_melee_lesser_data = {
