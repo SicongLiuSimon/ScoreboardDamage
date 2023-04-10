@@ -21,6 +21,11 @@ return {
 				type = "checkbox",
 				default_value = true,
 			},
+			{
+				setting_id = "plugin_melee_ranged_killed",
+				type = "checkbox",
+				default_value = true,
+			},
 		},
 	},
 }

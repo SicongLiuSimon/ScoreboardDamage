@@ -57,4 +57,20 @@ return {
 		en = "Disabler",
 		["zh-cn"] = "控制",
 	},
+	plugin_melee_ranged_killed = {
+		en = "Melee / Ranged Killed",
+		["zh-cn"] = "近战 / 远程击杀",
+	},
+	row_melee_ranged_killed = {
+		en = "Melee / Ranged Killed",
+		["zh-cn"] = "近战 / 远程击杀",
+	},
+	row_melee_killed = {
+		en = "Melee",
+		["zh-cn"] = "近战",
+	},
+	row_ranged_killed = {
+		en = "Ranged",
+		["zh-cn"] = "远程",
+	},
 }

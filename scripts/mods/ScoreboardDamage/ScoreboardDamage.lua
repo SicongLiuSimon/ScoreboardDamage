@@ -90,6 +90,12 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 				mod.current_health[attacked_unit] = nil
 				-- Update scoreboard
 				-- mod:echo(breed_or_nil.name)
+				if attack_type == "melee" then
+					scoreboard:update_stat("melee_killed", account_id, 1)
+				else
+				-- elseif attack_type == "ranged" then
+					scoreboard:update_stat("ranged_killed", account_id, 1)
+				end
 			end
 			
 			if table.array_contains(mod.melee_lessers, breed_or_nil.name) then
@@ -200,5 +206,35 @@ mod.scoreboard_rows = {
 		group = "offense",
 		parent = "special_disabler_damage_dealt",
 		setting = "plugin_special_disabler_damage_dealt",
+	},
+	{
+		name = "melee_ranged_killed",
+		text = "row_melee_ranged_killed",
+		validation = "ASC",
+		iteration = "ADD",
+		summary = {
+			"melee_killed",
+			"ranged_killed",
+		},
+		group = "offense",
+		setting = "plugin_melee_ranged_killed",
+	},
+	{
+		name = "melee_killed",
+		text = "row_melee_killed",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "melee_ranged_killed",
+		setting = "plugin_melee_ranged_killed",
+	},
+	{
+		name = "ranged_killed",
+		text = "row_ranged_killed",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "melee_ranged_killed",
+		setting = "plugin_melee_ranged_killed",
 	},
 }
