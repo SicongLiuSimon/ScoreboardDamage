@@ -7,22 +7,42 @@ return {
 	options = {
 		widgets = {
 			{
-				setting_id = "plugin_lesser_damage_dealt",
+				setting_id = "plugin_melee_data",
 				type = "checkbox",
 				default_value = true,
 			},
 			{
-				setting_id = "plugin_elite_damage_dealt",
+				setting_id = "plugin_ranged_data",
 				type = "checkbox",
 				default_value = true,
 			},
 			{
-				setting_id = "plugin_special_disabler_damage_dealt",
+				setting_id = "plugin_melee_lesser_data",
 				type = "checkbox",
 				default_value = true,
 			},
 			{
-				setting_id = "plugin_melee_ranged_killed",
+				setting_id = "plugin_ranged_lesser_data",
+				type = "checkbox",
+				default_value = true,
+			},
+			{
+				setting_id = "plugin_melee_elite_data",
+				type = "checkbox",
+				default_value = true,
+			},
+			{
+				setting_id = "plugin_ranged_elite_data",
+				type = "checkbox",
+				default_value = true,
+			},
+			{
+				setting_id = "plugin_special_data",
+				type = "checkbox",
+				default_value = true,
+			},
+			{
+				setting_id = "plugin_disabler_data",
 				type = "checkbox",
 				default_value = true,
 			},

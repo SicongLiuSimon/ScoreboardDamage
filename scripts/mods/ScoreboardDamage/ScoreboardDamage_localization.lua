@@ -9,68 +9,132 @@ return {
 		ru = "Очки за нападение",
 		["zh-cn"] = "进攻分数",
 	},
-	plugin_lesser_damage_dealt = {
-		en = "Melee / Ranged Lesser Damage Dealt",
-		["zh-cn"] = "近战 / 远程普通敌人伤害",
+	plugin_melee_data = {
+		en = "Melee Killed / Damage Dealt",
+		["zh-cn"] = "近战击杀 / 伤害",
 	},
-	row_lesser_damage_dealt = {
-		en = "Melee / Ranged Lesser Damage Dealt",
-		["zh-cn"] = "近战 / 远程普通敌人伤害",
-	},
-	row_melee_lesser_damage_dealt = {
-		en = "Melee",
-		["zh-cn"] = "近战",
-	},
-	row_ranged_lesser_damage_dealt = {
-		en = "Ranged",
-		["zh-cn"] = "远程",
-	},
-	plugin_elite_damage_dealt = {
-		en = "Melee / Ranged Elite Damage Dealt",
-		["zh-cn"] = "近战 / 远程精英敌人伤害",
-	},
-	row_elite_damage_dealt = {
-		en = "Melee / Ranged Elite Damage Dealt",
-		["zh-cn"] = "近战 / 远程精英敌人伤害",
-	},
-	row_melee_elite_damage_dealt = {
-		en = "Melee",
-		["zh-cn"] = "近战",
-	},
-	row_ranged_elite_damage_dealt = {
-		en = "Ranged",
-		["zh-cn"] = "远程",
-	},
-	plugin_special_disabler_damage_dealt = {
-		en = "Special / Disabler Damage Dealt",
-		["zh-cn"] = "专家 / 控制类伤害",
-	},
-	row_special_disabler_damage_dealt = {
-		en = "Special / Disabler Damage Dealt",
-		["zh-cn"] = "专家 / 控制类伤害",
-	},
-	row_special_damage_dealt = {
-		en = "Special",
-		["zh-cn"] = "专家",
-	},
-	row_disabler_damage_dealt = {
-		en = "Disabler",
-		["zh-cn"] = "控制",
-	},
-	plugin_melee_ranged_killed = {
-		en = "Melee / Ranged Killed",
-		["zh-cn"] = "近战 / 远程击杀",
-	},
-	row_melee_ranged_killed = {
-		en = "Melee / Ranged Killed",
-		["zh-cn"] = "近战 / 远程击杀",
+	row_melee_data= {
+		en = "Melee Killed / Damage Dealt",
+		["zh-cn"] = "近战击杀 / 伤害",
 	},
 	row_melee_killed = {
-		en = "Melee",
-		["zh-cn"] = "近战",
+		en = "Killed",
+		["zh-cn"] = "击杀",
+	},
+	row_melee_damaged = {
+		en = "Damage Dealt",
+		["zh-cn"] = "伤害",
+	},
+	plugin_ranged_data = {
+		en = "Ranged Killed / Damage Dealt",
+		["zh-cn"] = "远程击杀 / 伤害",
+	},
+	row_ranged_data= {
+		en = "Ranged Killed / Damage Dealt",
+		["zh-cn"] = "远程击杀 / 伤害",
 	},
 	row_ranged_killed = {
-		en = "Ranged",
-		["zh-cn"] = "远程",
+		en = "Killed",
+		["zh-cn"] = "击杀",
+	},
+	row_ranged_damaged = {
+		en = "Damage Dealt",
+		["zh-cn"] = "伤害",
+	},
+	plugin_melee_lesser_data = {
+		en = "Melee Lesser Killed / Damage Dealt",
+		["zh-cn"] = "近战普通敌人击杀 / 伤害",
+	},
+	row_melee_lesser_data= {
+		en = "Melee Lesser Killed / Damage Dealt",
+		["zh-cn"] = "近战普通敌人击杀 / 伤害",
+	},
+	row_melee_lesser_killed = {
+		en = "Killed",
+		["zh-cn"] = "击杀",
+	},
+	row_melee_lesser_damaged = {
+		en = "Damage Dealt",
+		["zh-cn"] = "伤害",
+	},
+	plugin_ranged_lesser_data = {
+		en = "Ranged Lesser Killed / Damage Dealt",
+		["zh-cn"] = "远程普通敌人击杀 / 伤害",
+	},
+	row_ranged_lesser_data= {
+		en = "Ranged Lesser Killed / Damage Dealt",
+		["zh-cn"] = "远程普通敌人击杀 / 伤害",
+	},
+	row_ranged_lesser_killed = {
+		en = "Killed",
+		["zh-cn"] = "击杀",
+	},
+	row_ranged_lesser_damaged = {
+		en = "Damage Dealt",
+		["zh-cn"] = "伤害",
+	},
+	plugin_melee_elite_data = {
+		en = "Melee elite Killed / Damage Dealt",
+		["zh-cn"] = "近战精英敌人击杀 / 伤害",
+	},
+	row_melee_elite_data= {
+		en = "Melee elite Killed / Damage Dealt",
+		["zh-cn"] = "近战精英敌人击杀 / 伤害",
+	},
+	row_melee_elite_killed = {
+		en = "Killed",
+		["zh-cn"] = "击杀",
+	},
+	row_melee_elite_damaged = {
+		en = "Damage Dealt",
+		["zh-cn"] = "伤害",
+	},
+	plugin_ranged_elite_data = {
+		en = "Ranged elite Killed / Damage Dealt",
+		["zh-cn"] = "远程精英敌人击杀 / 伤害",
+	},
+	row_ranged_elite_data= {
+		en = "Ranged elite Killed / Damage Dealt",
+		["zh-cn"] = "远程精英敌人击杀 / 伤害",
+	},
+	row_ranged_elite_killed = {
+		en = "Killed",
+		["zh-cn"] = "击杀",
+	},
+	row_ranged_elite_damaged = {
+		en = "Damage Dealt",
+		["zh-cn"] = "伤害",
+	},
+	plugin_special_data = {
+		en = "Special Killed / Damage Dealt",
+		["zh-cn"] = "特殊敌人击杀 / 伤害",
+	},
+	row_special_data= {
+		en = "Special Killed / Damage Dealt",
+		["zh-cn"] = "特殊敌人击杀 / 伤害",
+	},
+	row_special_killed = {
+		en = "Killed",
+		["zh-cn"] = "击杀",
+	},
+	row_special_damaged = {
+		en = "Damage Dealt",
+		["zh-cn"] = "伤害",
+	},
+	plugin_disabler_data = {
+		en = "Disabler Killed / Damage Dealt",
+		["zh-cn"] = "控制敌人击杀 / 伤害",
+	},
+	row_disabler_data= {
+		en = "Disabler Killed / Damage Dealt",
+		["zh-cn"] = "控制敌人击杀 / 伤害",
+	},
+	row_disabler_killed = {
+		en = "Killed",
+		["zh-cn"] = "击杀",
+	},
+	row_disabler_damaged = {
+		en = "Damage Dealt",
+		["zh-cn"] = "伤害",
 	},
 }
