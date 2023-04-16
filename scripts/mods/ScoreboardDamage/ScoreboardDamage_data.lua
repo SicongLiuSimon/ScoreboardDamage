@@ -17,6 +17,16 @@ return {
 				default_value = true,
 			},
 			{
+				setting_id = "plugin_melee_data_special",
+				type = "checkbox",
+				default_value = true,
+			},
+			{
+				setting_id = "plugin_ranged_data_special",
+				type = "checkbox",
+				default_value = true,
+			},
+			{
 				setting_id = "plugin_melee_lesser_data",
 				type = "checkbox",
 				default_value = true,

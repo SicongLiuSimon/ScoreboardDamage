@@ -57,6 +57,10 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 		local actual_damage = damage
 		local overkill_damage = 0
 
+		local player_unit_data_extension = ScriptUnit.has_extension(attacking_unit, "unit_data_system")
+		local critical_strike_component = player_unit_data_extension:read_component("critical_strike")
+		local is_critical_strike = critical_strike_component.is_active
+
 		if target_is_minion then
 			-- Set last interacting player_unit
 			mod.last_enemy_interaction[attacked_unit] = attacking_unit
@@ -112,9 +116,33 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 			end
 			
 			if attack_type == "melee" then
+				scoreboard:update_stat("melee_hit", account_id, 1)
 				scoreboard:update_stat("melee_damaged", account_id, actual_damage)
+				if is_critical_strike then
+					scoreboard:update_stat("melee_critical_hit", account_id, 1)
+				end
+				if hit_weakspot then
+					scoreboard:update_stat("melee_weakspot_hit", account_id, 1)
+				end
+
+				local melee_weakspot_hit = math.floor(mod:get_value("melee_weakspot_hit", account_id) / mod:get_value("melee_hit", account_id) * 100)
+				local melee_critical_hit = math.floor(mod:get_value("melee_critical_hit", account_id) / mod:get_value("melee_hit", account_id) * 100)
+				scoreboard:update_row_value_force("melee_critical_rate", account_id, melee_critical_hit)
+				scoreboard:update_row_value_force("melee_weakspot_rate", account_id, melee_weakspot_hit)
 			else
+				scoreboard:update_stat("ranged_hit", account_id, 1)
 				scoreboard:update_stat("ranged_damaged", account_id, actual_damage)
+				if is_critical_strike then
+					scoreboard:update_stat("ranged_critical_hit", account_id, 1)
+				end
+				if hit_weakspot then
+					scoreboard:update_stat("ranged_weakspot_hit", account_id, 1)
+				end
+
+				local ranged_weakspot_hit = math.floor(mod:get_value("ranged_weakspot_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100)
+				local ranged_critical_hit = math.floor(mod:get_value("ranged_critical_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100)
+				scoreboard:update_row_value_force("ranged_critical_rate", account_id, ranged_critical_hit)
+				scoreboard:update_row_value_force("ranged_weakspot_rate", account_id, ranged_weakspot_hit)
 			end
 
 			if table.array_contains(mod.melee_lessers, breed_or_nil.name) then
@@ -134,6 +162,27 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 	end
 	return func(self, damage_profile, attacked_unit, attacking_unit, attack_direction, hit_world_position, hit_weakspot, damage, attack_result, attack_type, damage_efficiency, ...)
 end)
+
+scoreboard.update_row_value_force = function(self, row_name, account_id, value)
+	-- Normalize value
+	local value = value and math.max(0, value) or 0
+	-- Get row
+	local row = self:get_scoreboard_row(row_name)
+	if row then
+		row.data = row.data or {}
+		-- Update row
+		local validation = row.validation
+		row.data[account_id] = {
+			value = value,
+			score = value,
+		}
+	end
+end
+
+mod.get_value = function(self, row_name, account_id)
+	local character_data = scoreboard:get_scoreboard_row(row_name).data[account_id]
+	return character_data and character_data.score or 0
+end
 
 mod.scoreboard_rows = {
 	{
@@ -195,6 +244,120 @@ mod.scoreboard_rows = {
 		group = "offense",
 		parent = "ranged_data",
 		setting = "plugin_ranged_data",
+	},
+	{
+		name = "melee_data_special",
+		text = "row_melee_data_special",
+		validation = "ASC",
+		iteration = "ADD",
+		summary = {
+			"melee_weakspot_rate",
+			"melee_critical_rate",
+		},
+		group = "offense",
+		setting = "plugin_melee_data_special",
+	},
+	{
+		name = "melee_weakspot_rate",
+		text = "row_melee_weakspot_rate",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "melee_data_special",
+		setting = "plugin_melee_data_special",
+	},
+	{
+		name = "melee_critical_rate",
+		text = "row_melee_critical_rate",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "melee_data_special",
+		setting = "plugin_melee_data_special",
+	},
+	{
+		name = "melee_hit",
+		text = "row_melee_hit",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		visible = false,
+		setting = "plugin_melee_data_special",
+	},
+	{
+		name = "melee_weakspot_hit",
+		text = "row_melee_weakspot_hit",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		visible = false,
+		setting = "plugin_melee_data_special",
+	},
+	{
+		name = "melee_critical_hit",
+		text = "row_melee_critical_hit",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		visible = false,
+		setting = "plugin_melee_data_special",
+	},
+	{
+		name = "ranged_data_special",
+		text = "row_ranged_data_special",
+		validation = "ASC",
+		iteration = "ADD",
+		summary = {
+			"ranged_weakspot_rate",
+			"ranged_critical_rate",
+		},
+		group = "offense",
+		setting = "plugin_ranged_data_special",
+	},
+	{
+		name = "ranged_weakspot_rate",
+		text = "row_ranged_weakspot_rate",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "ranged_data_special",
+		setting = "plugin_ranged_data_special",
+	},
+	{
+		name = "ranged_critical_rate",
+		text = "row_ranged_critical_rate",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "ranged_data_special",
+		setting = "plugin_ranged_data_special",
+	},
+	{
+		name = "ranged_hit",
+		text = "row_ranged_hit",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		visible = false,
+		setting = "plugin_ranged_data_special",
+	},
+	{
+		name = "ranged_weakspot_hit",
+		text = "row_ranged_weakspot_hit",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		visible = false,
+		setting = "plugin_ranged_data_special",
+	},
+	{
+		name = "ranged_critical_hit",
+		text = "row_ranged_critical_hit",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		visible = false,
+		setting = "plugin_ranged_data_special",
 	},
 	{
 		name = "melee_lesser_data",
