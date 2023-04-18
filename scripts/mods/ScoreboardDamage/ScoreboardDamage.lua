@@ -131,8 +131,8 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 					scoreboard:update_stat("melee_weakspot_hit", account_id, 1)
 				end
 
-				local melee_weakspot_rate = math.floor(mod:get_value("melee_weakspot_hit", account_id) / mod:get_value("melee_hit", account_id) * 100)
-				local melee_critical_rate = math.floor(mod:get_value("melee_critical_hit", account_id) / mod:get_value("melee_hit", account_id) * 100)
+				local melee_weakspot_rate = mod:get_value("melee_weakspot_hit", account_id) / mod:get_value("melee_hit", account_id) * 100
+				local melee_critical_rate = mod:get_value("melee_critical_hit", account_id) / mod:get_value("melee_hit", account_id) * 100
 				scoreboard:update_row_value_force("melee_critical_rate", account_id, melee_critical_rate)
 				scoreboard:update_row_value_force("melee_weakspot_rate", account_id, melee_weakspot_rate)
 			else
@@ -145,8 +145,8 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 					scoreboard:update_stat("ranged_weakspot_hit", account_id, 1)
 				end
 
-				local ranged_weakspot_rate = math.floor(mod:get_value("ranged_weakspot_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100)
-				local ranged_critical_rate = math.floor(mod:get_value("ranged_critical_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100)
+				local ranged_weakspot_rate = mod:get_value("ranged_weakspot_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100
+				local ranged_critical_rate = mod:get_value("ranged_critical_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100
 				scoreboard:update_row_value_force("ranged_critical_rate", account_id, ranged_critical_rate)
 				scoreboard:update_row_value_force("ranged_weakspot_rate", account_id, ranged_weakspot_rate)
 			end

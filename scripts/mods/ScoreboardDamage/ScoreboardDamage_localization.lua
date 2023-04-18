@@ -12,16 +12,16 @@ return {
 		["zh-cn"] = "敌人数据",
 	},
 	plugin_enemy_data_full = {
-		en = "Full Enemy Data",
-		["zh-cn"] = "全部敌人数据",
+		en = "Full",
+		["zh-cn"] = "全部",
 	},
 	plugin_enemy_data_simple = {
-		en = "Simple Enemy Data",
-		["zh-cn"] = "简单敌人数据",
+		en = "Simple",
+		["zh-cn"] = "简洁",
 	},
 	plugin_enemy_data_off = {
-		en = "No Enemy Data",
-		["zh-cn"] = "关闭敌人数据",
+		en = "Off",
+		["zh-cn"] = "关闭",
 	},
 	row_offense_score = {
 		en = "Offense Score",
