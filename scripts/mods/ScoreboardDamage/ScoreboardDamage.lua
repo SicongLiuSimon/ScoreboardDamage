@@ -102,16 +102,22 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 
 				if table.array_contains(mod.melee_lessers, breed_or_nil.name) then
 					scoreboard:update_stat("melee_lesser_killed", account_id, 1)
+					scoreboard:update_stat("lesser_killed", account_id, 1)
 				elseif table.array_contains(mod.ranged_lessers, breed_or_nil.name) then
 					scoreboard:update_stat("ranged_lesser_killed", account_id, 1)
+					scoreboard:update_stat("lesser_killed", account_id, 1)
 				elseif table.array_contains(mod.melee_elites, breed_or_nil.name) then
 					scoreboard:update_stat("melee_elite_killed", account_id, 1)
+					scoreboard:update_stat("elite_killed", account_id, 1)
 				elseif table.array_contains(mod.ranged_elites, breed_or_nil.name) then
 					scoreboard:update_stat("ranged_elite_killed", account_id, 1)
+					scoreboard:update_stat("elite_killed", account_id, 1)
 				elseif table.array_contains(mod.specials, breed_or_nil.name) then
 					scoreboard:update_stat("special_killed", account_id, 1)
+					scoreboard:update_stat("special_disabler_killed", account_id, actual_damage)
 				elseif table.array_contains(mod.disablers, breed_or_nil.name) then
 					scoreboard:update_stat("disabler_killed", account_id, 1)
+					scoreboard:update_stat("special_disabler_killed", account_id, actual_damage)
 				end
 			end
 			
@@ -125,10 +131,10 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 					scoreboard:update_stat("melee_weakspot_hit", account_id, 1)
 				end
 
-				local melee_weakspot_hit = math.floor(mod:get_value("melee_weakspot_hit", account_id) / mod:get_value("melee_hit", account_id) * 100)
-				local melee_critical_hit = math.floor(mod:get_value("melee_critical_hit", account_id) / mod:get_value("melee_hit", account_id) * 100)
-				scoreboard:update_row_value_force("melee_critical_rate", account_id, melee_critical_hit)
-				scoreboard:update_row_value_force("melee_weakspot_rate", account_id, melee_weakspot_hit)
+				local melee_weakspot_rate = math.floor(mod:get_value("melee_weakspot_hit", account_id) / mod:get_value("melee_hit", account_id) * 100)
+				local melee_critical_rate = math.floor(mod:get_value("melee_critical_hit", account_id) / mod:get_value("melee_hit", account_id) * 100)
+				scoreboard:update_row_value_force("melee_critical_rate", account_id, melee_critical_rate)
+				scoreboard:update_row_value_force("melee_weakspot_rate", account_id, melee_weakspot_rate)
 			else
 				scoreboard:update_stat("ranged_hit", account_id, 1)
 				scoreboard:update_stat("ranged_damaged", account_id, actual_damage)
@@ -139,24 +145,30 @@ mod:hook(CLASS.AttackReportManager, "add_attack_result", function(
 					scoreboard:update_stat("ranged_weakspot_hit", account_id, 1)
 				end
 
-				local ranged_weakspot_hit = math.floor(mod:get_value("ranged_weakspot_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100)
-				local ranged_critical_hit = math.floor(mod:get_value("ranged_critical_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100)
-				scoreboard:update_row_value_force("ranged_critical_rate", account_id, ranged_critical_hit)
-				scoreboard:update_row_value_force("ranged_weakspot_rate", account_id, ranged_weakspot_hit)
+				local ranged_weakspot_rate = math.floor(mod:get_value("ranged_weakspot_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100)
+				local ranged_critical_rate = math.floor(mod:get_value("ranged_critical_hit", account_id) / mod:get_value("ranged_hit", account_id) * 100)
+				scoreboard:update_row_value_force("ranged_critical_rate", account_id, ranged_critical_rate)
+				scoreboard:update_row_value_force("ranged_weakspot_rate", account_id, ranged_weakspot_rate)
 			end
 
 			if table.array_contains(mod.melee_lessers, breed_or_nil.name) then
 				scoreboard:update_stat("melee_lesser_damaged", account_id, actual_damage)
+				scoreboard:update_stat("lesser_damaged", account_id, actual_damage)
 			elseif table.array_contains(mod.ranged_lessers, breed_or_nil.name) then
 				scoreboard:update_stat("ranged_lesser_damaged", account_id, actual_damage)
+				scoreboard:update_stat("lesser_damaged", account_id, actual_damage)
 			elseif table.array_contains(mod.melee_elites, breed_or_nil.name) then
 				scoreboard:update_stat("melee_elite_damaged", account_id, actual_damage)
+				scoreboard:update_stat("elite_damaged", account_id, actual_damage)
 			elseif table.array_contains(mod.ranged_elites, breed_or_nil.name) then
 				scoreboard:update_stat("ranged_elite_damaged", account_id, actual_damage)
+				scoreboard:update_stat("elite_damaged", account_id, actual_damage)
 			elseif table.array_contains(mod.specials, breed_or_nil.name) then
 				scoreboard:update_stat("special_damaged", account_id, actual_damage)
+				scoreboard:update_stat("special_disabler_damaged", account_id, actual_damage)
 			elseif table.array_contains(mod.disablers, breed_or_nil.name) then
 				scoreboard:update_stat("disabler_damaged", account_id, actual_damage)
+				scoreboard:update_stat("special_disabler_damaged", account_id, actual_damage)
 			end
 		end
 	end
@@ -360,6 +372,96 @@ mod.scoreboard_rows = {
 		setting = "plugin_ranged_data_special",
 	},
 	{
+		name = "lesser_data",
+		text = "row_lesser_data",
+		validation = "ASC",
+		iteration = "ADD",
+		summary = {
+			"lesser_killed",
+			"lesser_damaged",
+		},
+		group = "offense",
+		setting = "plugin_enemy_data = 2",
+	},
+	{
+		name = "lesser_killed",
+		text = "row_lesser_killed",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "lesser_data",
+		setting = "plugin_enemy_data = 2",
+	},
+	{
+		name = "lesser_damaged",
+		text = "row_lesser_damaged",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "lesser_data",
+		setting = "plugin_enemy_data = 2",
+	},
+	{
+		name = "elite_data",
+		text = "row_elite_data",
+		validation = "ASC",
+		iteration = "ADD",
+		summary = {
+			"elite_killed",
+			"elite_damaged",
+		},
+		group = "offense",
+		setting = "plugin_enemy_data = 2",
+	},
+	{
+		name = "elite_killed",
+		text = "row_elite_killed",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "elite_data",
+		setting = "plugin_enemy_data = 2",
+	},
+	{
+		name = "elite_damaged",
+		text = "row_elite_damaged",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "elite_data",
+		setting = "plugin_enemy_data = 2",
+	},
+	{
+		name = "special_disabler_data",
+		text = "row_special_disabler_data",
+		validation = "ASC",
+		iteration = "ADD",
+		summary = {
+			"special_disabler_killed",
+			"special_disabler_damaged",
+		},
+		group = "offense",
+		setting = "plugin_enemy_data = 2",
+	},
+	{
+		name = "special_disabler_killed",
+		text = "row_special_disabler_killed",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "special_disabler_data",
+		setting = "plugin_enemy_data = 2",
+	},
+	{
+		name = "special_disabler_damaged",
+		text = "row_special_disabler_damaged",
+		validation = "ASC",
+		iteration = "ADD",
+		group = "offense",
+		parent = "special_disabler_data",
+		setting = "plugin_enemy_data = 2",
+	},
+	{
 		name = "melee_lesser_data",
 		text = "row_melee_lesser_data",
 		validation = "ASC",
@@ -369,7 +471,7 @@ mod.scoreboard_rows = {
 			"melee_lesser_damaged",
 		},
 		group = "offense",
-		setting = "plugin_melee_lesser_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "melee_lesser_killed",
@@ -378,7 +480,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "melee_lesser_data",
-		setting = "plugin_melee_lesser_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "melee_lesser_damaged",
@@ -387,7 +489,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "melee_lesser_data",
-		setting = "plugin_melee_lesser_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "ranged_lesser_data",
@@ -399,7 +501,7 @@ mod.scoreboard_rows = {
 			"ranged_lesser_damaged",
 		},
 		group = "offense",
-		setting = "plugin_ranged_lesser_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "ranged_lesser_killed",
@@ -408,7 +510,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "ranged_lesser_data",
-		setting = "plugin_ranged_lesser_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "ranged_lesser_damaged",
@@ -417,7 +519,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "ranged_lesser_data",
-		setting = "plugin_ranged_lesser_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "melee_elite_data",
@@ -429,7 +531,7 @@ mod.scoreboard_rows = {
 			"melee_elite_damaged",
 		},
 		group = "offense",
-		setting = "plugin_melee_elite_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "melee_elite_killed",
@@ -438,7 +540,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "melee_elite_data",
-		setting = "plugin_melee_elite_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "melee_elite_damaged",
@@ -447,7 +549,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "melee_elite_data",
-		setting = "plugin_melee_elite_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "ranged_elite_data",
@@ -459,7 +561,7 @@ mod.scoreboard_rows = {
 			"ranged_elite_damaged",
 		},
 		group = "offense",
-		setting = "plugin_ranged_elite_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "ranged_elite_killed",
@@ -468,7 +570,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "ranged_elite_data",
-		setting = "plugin_ranged_elite_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "ranged_elite_damaged",
@@ -477,19 +579,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "ranged_elite_data",
-		setting = "plugin_ranged_elite_data",
-	},
-	{
-		name = "special_disabler_damaged",
-		text = "row_special_disabler_damaged",
-		validation = "ASC",
-		iteration = "ADD",
-		summary = {
-			"special_damaged",
-			"disabler_damaged",
-		},
-		group = "offense",
-		setting = "plugin_special_disabler_damaged",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "special_data",
@@ -501,7 +591,7 @@ mod.scoreboard_rows = {
 			"special_damaged",
 		},
 		group = "offense",
-		setting = "plugin_special_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "special_killed",
@@ -510,7 +600,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "special_data",
-		setting = "plugin_special_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "special_damaged",
@@ -519,7 +609,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "special_data",
-		setting = "plugin_special_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "disabler_data",
@@ -531,7 +621,7 @@ mod.scoreboard_rows = {
 			"disabler_damaged",
 		},
 		group = "offense",
-		setting = "plugin_disabler_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "disabler_killed",
@@ -540,7 +630,7 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "disabler_data",
-		setting = "plugin_disabler_data",
+		setting = "plugin_enemy_data = 1",
 	},
 	{
 		name = "disabler_damaged",
@@ -549,6 +639,6 @@ mod.scoreboard_rows = {
 		iteration = "ADD",
 		group = "offense",
 		parent = "disabler_data",
-		setting = "plugin_disabler_data",
+		setting = "plugin_enemy_data = 1",
 	},
 }
